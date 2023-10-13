@@ -1,0 +1,27 @@
+<!-- dialog-box.component.html -->
+<h1 mat-dialog-title>
+  Row Action :: <strong>{{ action }}</strong>
+</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>drivers</mat-label>
+    <mat-select [formControl]="drivers" multiple matInput [(ngModel)]="local_data.driver">
+      <mat-select-trigger>
+        {{ drivers.value ? drivers.value[0] : '' }}
+        <span *ngIf="drivers.value?.length > 1" class="example-additional-selection">
+          (+{{ drivers.value.length - 1 }} {{ drivers.value?.length === 2 ? 'other' : 'others' }})
+        </span>
+      </mat-select-trigger>
+      <mat-option *ngFor="let drivers of driversList" [value]="drivers">{{ drivers }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+ 
+
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{ local_data.customerId }} </b>
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">{{ action }}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>

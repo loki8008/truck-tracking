@@ -1,0 +1,14 @@
+@import '../../../utils/global';
+
+@import '../../../utils/variables';
+
+.container {
+  .content {
+    margin: 10px;
+  }
+}
+
+::ng-deep.mat-select-value {
+  // color: rgba(0, 0, 0, .87);
+  color: $primary-text-color;
+}

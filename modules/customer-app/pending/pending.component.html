@@ -1,0 +1,60 @@
+<div>
+    <p class="text-blue-700 text-lg">Pending Loads/Plans to be tracked:</p>
+    <div class="example-button-row-a">
+      <button mat-raised-button color="primary">Add New Load Plan</button>
+      <button mat-raised-button color="primary">Add/Edit Tracking Device</button>
+      <button mat-raised-button color="primary">Start Tracking</button>
+      <button mat-raised-button color="primary">DeAllocate Freight</button>
+    </div>
+  </div>
+  <div><br>
+    <table mat-table [dataSource] = "dataSource" class="mat-elevation-z8 ">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th  class="text-white text-lg" mat-header-cell *matHeaderCellDef> Route</th>
+        <td mat-cell *matCellDef="let element">  {{element.position}}  </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th class="text-white text-lg" mat-header-cell *matHeaderCellDef> Trucker/Transporter Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th class="text-white text-lg" mat-header-cell *matHeaderCellDef> FreightAllocation Date/Time </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th class="text-white text-lg" mat-header-cell *matHeaderCellDef> Tracking Device Id: </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div><br>
+  <div>
+    <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+        </mat-card-header>
+        <!-- <img mat-card-image src="/assets/images/1.png" alt="Location">
+         -->
+         <div id="map" style="height: 400px;width: 400px; "></div>
+         
+        </mat-card>
+      </div><br>
+      <div>
+        <app-live></app-live><br>
+  <app-document></app-document>
+  </div>
+
+

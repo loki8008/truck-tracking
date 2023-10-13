@@ -1,0 +1,78 @@
+<div class="example-button-row pr:10px">
+</div><br>
+
+
+<button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add Row</button>
+<button mat-raised-button color="primary"  (click)="openDialog('Delete',{})">Delete</button>
+  <table mat-table [dataSource]="dataSource" #mytable class="my-table mat-elevation-z8">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                     >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <!-- Id Column -->
+    <ng-container matColumnDef="plan_FrieghtId">
+      <th  class="text-white text-lg" mat-header-cell *matHeaderCellDef>Freight Plan Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="start_Route">
+      <th  class="text-white text-lg" mat-header-cell *matHeaderCellDef> start Route  </th>
+      <td mat-cell *matCellDef="let element"> {{element.start_Route}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="end_Route">
+      <th  class="text-white text-lg" mat-header-cell *matHeaderCellDef>End Route  </th>
+      <td mat-cell *matCellDef="let element"> {{element.end_Route}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateandtime">
+      <th class="text-white text-lg" mat-header-cell *matHeaderCellDef> Freight Required Date & Time </th>
+      <td mat-cell *matCellDef="let element"> {{element.date_time}} </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="image">
+      <th class="text-white text-lg" mat-header-cell *matHeaderCellDef> Image  </th>
+      <td mat-cell *matCellDef="let element"> <img [src]="element.image" /> </td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="total_Delivery_Quantity">
+      <th class="text-white text-lg" mat-header-cell *matHeaderCellDef> Total Freight Deliver Quantity </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="freight_Plan_Added_By">
+      <th class="text-white text-lg" mat-header-cell *matHeaderCellDef> Freight Plan Added by  </th>
+      <td mat-cell *matCellDef="let element"> {{element.freight_Plan_Added_By}} </td>
+    </ng-container> -->
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th class="text-white text-lg" mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element" class="action-link">
+        <button mat-raised-button color="primary" (click)="openDialog('Update',element)">Edit</button>
+
+      </td>
+    </ng-container> <!-- Action Column -->
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+<div>
+
+</div>

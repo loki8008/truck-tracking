@@ -1,0 +1,57 @@
+<div>
+<mat-label>Live Tracking Data - User Name: Antony S  Business Name: Biz Name 1 </mat-label><br>
+<table class="shadow-lg bg-white border-collapse">
+  <tr>
+    <th class="example1 bg-blue-100 border text-left  px-8 py-4">Route</th>
+    <th class="example1 bg-blue-100 border text-left width-300 px-8 py-4">Status</th>
+    <th class="example1 bg-blue-100 border text-left px-8 py-4">Request Notification</th>
+  </tr>
+  <tr class="example1">
+    <td class="border px-8 py-4"><mat-checkbox class="example-margin" [disabled]="false"></mat-checkbox>
+       Biz Name 1 & Biz Name 3</td>
+    <td class="border px-8 py-4">In Progress</td>
+    <td class="border px-8 py-4">
+    <mat-form-field appearance="fill">
+      <mat-select>
+        <mat-option *ngFor="let state of states" [value]="state"> {{state}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </td>
+
+  </tr>
+  <tr class="example1">
+    <td class="border px-8 py-4"><mat-checkbox class="example-margin" [disabled]="false"></mat-checkbox>
+   </td>
+
+    <td class="border px-8 py-4">Delivered and POD awaited<br>
+      <button mat-raised-button color="primary">Provide Digital POD</button>
+  </td>
+    <td class="border px-8 py-4">
+      <mat-form-field appearance="fill">
+        <mat-select>
+          <mat-option *ngFor="let state of states" [value]="state"> {{state}} </mat-option>
+        </mat-select>
+      </mat-form-field><br>
+      <mat-label>GPS device</mat-label>
+    </td>
+  </tr>
+  <tr class="example1">
+    <td class="border px-8 py-4"><mat-checkbox class="example-margin" [disabled]="false"> </mat-checkbox>
+    </td>
+
+    <td class="border px-8 py-4">Vehicle idle since 03:00 PM</td>
+    <td class="border px-8 py-4">
+      <mat-form-field appearance="fill">
+      <mat-select>
+        <mat-option *ngFor="let state of states" [value]="state"> {{state}} </mat-option>
+      </mat-select>
+    </mat-form-field></td>
+  </tr>
+  <tr class="example1">
+    <td class="border px-8 py-4"></td>
+    <td class="border px-8 py-4">Digital OPD issued by Antoy S</td>
+    <td class="border px-8 py-4">
+
+    </td>
+  </tr>
+</table>

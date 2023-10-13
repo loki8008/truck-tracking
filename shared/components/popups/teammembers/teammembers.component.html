@@ -1,0 +1,212 @@
+<mat-menu #menu="matMenu">
+  <div (click)="$event.stopPropagation()">
+    <div class="container">
+      <div>
+        <mat-form-field>
+          <span matPrefix><mat-icon>search</mat-icon></span>
+          <input
+            matInput
+            placeholder="search text goes here"
+            name="search"
+            [(ngModel)]="searchText"
+            autocomplete="off"
+          />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <table class="table table-striped">
+          <tbody>
+            <tr *ngFor="let res of resources | filter: searchText">
+              <td>
+                <img class="custom-task-img" attr.src="{{ res.photo_id }}" />
+              </td>
+              <td matRipple>
+                <button [value]="res.id">
+                  {{ res.text }}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</mat-menu>
+
+<h1 mat-dialog-title>Team Members</h1>
+
+<mat-dialog-content>
+  <div class="container">
+    <div class="content">
+      <div class="flex flex-row">
+        <div>
+          <span class="font-bold">Work / Project: </span>
+          <p class="underline text-[#3366ff]">calendar App</p>
+        </div>
+        <div>
+          <span class="font-bold">Team Leader/s: </span>
+          <p class="underline text-[#3366ff]">Tabitha Potter Ram S</p>
+        </div>
+      </div>
+      <div fxLayout="column" style="margin: 20px 0 10px 0">
+        <div class="flex flex-row space-x-4">
+          <div>
+            <p class="text-[#3366ff]">Team Members</p>
+
+            <p class="text-[#9a9a9a]">*Can be edited by Team Leader/s Only</p>
+          </div>
+          <div>
+            <button
+              mat-raised-button
+              class="app-btn"
+              [style.background-color]="'#3366ff'"
+              style="color: white"
+              [matMenuTriggerFor]="menu"
+              #menuTrigger="matMenuTrigger"
+            >
+              ADD
+            </button>
+
+            <button mat-raised-button class="app-btn" (click)="removeSelectedRows()">REMOVE</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="table-responsive mat-elevation-z8 printTable">
+          <mat-table #table id="ExampleMaterialTable" matSort [dataSource]="dataSource" matTableResponsive>
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox
+                  (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()"
+                >
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox
+                  (click)="$event.stopPropagation()"
+                  (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)"
+                >
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell mat-sort-header *matHeaderCellDef>User Name</mat-header-cell>
+              <mat-cell class="flex-stretch" *matCellDef="let element"> {{ element.name }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="view_project">
+              <mat-header-cell mat-sort-header *matHeaderCellDef>View Project</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-checkbox [(ngModel)]="row.view_project" [disabled]="row.view_project"> </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit_project">
+              <mat-header-cell mat-sort-header *matHeaderCellDef>Edit Project</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-checkbox [(ngModel)]="row.edit_project"> </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="update_status">
+              <mat-header-cell mat-sort-header *matHeaderCellDef>Update Status</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-checkbox [(ngModel)]="row.update_status"></mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="team_member_other_projects">
+              <mat-header-cell mat-sort-header *matHeaderCellDef
+                >Can Access team members other Projects</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row">
+                <mat-checkbox [(ngModel)]="row.team_member_other_projects"> </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit_attachments">
+              <mat-header-cell mat-sort-header *matHeaderCellDef>Add / Edit Attachments</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-checkbox [(ngModel)]="row.edit_attachments"> </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="promote_leader">
+              <mat-header-cell mat-sort-header *matHeaderCellDef>Promote to Team Leader</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-checkbox [(ngModel)]="row.promote_leader"> </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              (click)="selection.toggle(row)"
+              [ngClass]="{ highlighted: selection.isSelected(row) }"
+            >
+            </mat-row>
+          </mat-table>
+          <!-- <mat-toolbar> -->
+          <mat-toolbar-row>
+            <mat-icon title="Export" style="cursor: pointer" [matMenuTriggerFor]="exportMenu">save_alt </mat-icon>
+            <mat-menu #exportMenu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>picture_as_pdf</mat-icon>
+                <span>Export PDF</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>grid_on</mat-icon>
+                <span>Export SpreadSheet</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>grid_on</mat-icon>
+                <span>Export csv File</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>grid_on</mat-icon>
+                <span>Export json</span>
+              </button>
+              <button mat-menu-item ngxPrintItemButton className="printTable printTitle">
+                <mat-icon>print</mat-icon>
+                <span>Print</span>
+              </button>
+            </mat-menu>
+            <mat-form-field
+              appearance="outline"
+              style="width: 25%; margin-left: 10px; font-size: 10px"
+              class="form-field-style primary-font-family"
+            >
+              <input matInput (keyup)="applyFilter($event)" placeholder="Search" />
+            </mat-form-field>
+            <mat-paginator
+              (page)="
+                paginatorHtmlElement.nativeElement.querySelector('div.mat-select-value > span > span').innerHTML =
+                  paginator.pageSize == 2147483647 ? 'All' : paginator.pageSize
+              "
+              #paginator
+              #paginatorElement
+              [length]="dataSource.data.length"
+              style="width: 100%"
+              class="paginator"
+              [hidePageSize]="false"
+              [showFirstLastButtons]="false"
+              [pageSizeOptions]="[5, 10, 20, 2147483647]"
+            >
+            </mat-paginator>
+          </mat-toolbar-row>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<!-- <mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="folderName" color="primary">OK</button>
+</mat-dialog-actions> -->

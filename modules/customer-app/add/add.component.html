@@ -1,0 +1,418 @@
+<div>
+<div #register="ngForm" [formGroup]="form1"><br>
+  <table class="shadow-lg bg-white border-collapse">
+    <tr>
+      <th class="mat-header-cell  text-white text-lg border px-8 py-4 ">Route Plan</th>
+      <th class="mat-header-cell text-white text-lg border px-8 py-">pick-Up/Delivery/Report</th>
+      <th class="mat-header-cell text-white text-lg border px-8 py- ">Pick-up Quantity:Unit of Measurement</th>
+      <th class="mat-header-cell text-white text-lg border px-8 py-">Delivery Quantity:Unit of Measurement</th>
+    </tr>
+    <tr>
+
+      <td class="example2 border-line px-8 text-center border py-4">
+        <div>
+
+        <h4>Start Route </h4>
+        <mat-form-field appearance="outline">
+          <mat-label for="Biz1">Biz1</mat-label>
+          <mat-select  formControlName="Biz1">
+            <mat-option *ngFor="let option of options" [value]="option">
+              {{option}}
+            </mat-option>
+            <mat-error *ngIf="form1.get('Biz1')?.hasError('required')" >
+              Business Name is required*
+              </mat-error>
+        </mat-select>
+        </mat-form-field>
+      </div>
+    </td>
+
+      <td class="example2 text-center border px-8 py-4">
+        <div #register="ngForm" [formGroup]="form1">
+        <mat-form-field appearance="outline">
+          <mat-label for="service">Service</mat-label>
+          <mat-select formControlName="service">
+            <mat-option *ngFor="let option of options" [value]="option">
+              {{option}}
+            </mat-option>
+            <mat-error *ngIf="form1.get('service')?.hasError('required')">
+              Service Name is Required*
+            </mat-error>
+        </mat-select>
+        </mat-form-field>
+        </div>
+      </td>
+      <td class="example2 text-center border px-8 py-4">
+        <div #register="ngForm" [formGroup]="form1">
+        <mat-form-field class="example4" appearance="outline">
+          <mat-label for="quanity">Quantity</mat-label>
+          <mat-select  formControlName="quanity">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+            <mat-error *ngIf="form1.get('quanity')?.hasError('required')">
+              Service Name is Required*
+            </mat-error>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example" appearance="outline">
+          <mat-label for="mt">Mt</mat-label>
+          <mat-select formControlName="mt"disableRipple>
+            <mat-option value="1"> 1</mat-option>
+            <mat-option value="2"> 2</mat-option>
+            <mat-option value="3"> 3</mat-option>
+            <mat-error *ngIf="form1.get('mt')?.hasError('required')">
+            </mat-error>
+          </mat-select>
+        </mat-form-field>
+        </div>
+           <div class="col-md-2">
+    <div class="btn-div">
+    <button mat-mini-fab color="accent"class="ss" (click)="onAddRow()" *ngIf="tmpo!=1;else temp"><mat-icon>add</mat-icon></button>
+</div><br>
+</div>
+<ng-template #temp><br><br>
+  <mat-form-field class="example5" appearance="outline">
+    <mat-label>Quantity</mat-label>
+    <mat-select >
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example3" appearance="outline">
+    <mat-label>Mt</mat-label>
+    <mat-select disableRipple>
+      <mat-option value="1"> 1</mat-option>
+      <mat-option value="2"> 2</mat-option>
+      <mat-option value="3"> 3</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button class="a" mat-mini-fab color="accent" (click)="onDelete()">
+  <mat-icon>remove</mat-icon>
+</button>
+  <br>
+  <br>
+      <button><span (click)="onAddRow1()" *ngIf="tmpo!=2;else temp"></span>
+      </button>
+  <ng-template>
+       <ng-template #tmpo>
+        <mat-form-field class="example3 align-left" appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <mat-select>
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example3" appearance="outline">
+          <mat-label>Mt</mat-label>
+          <mat-select disableRipple>
+            <mat-option value="1"> 1</mat-option>
+            <mat-option value="2"> 2</mat-option>
+            <mat-option value="3"> 3</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </ng-template>
+</ng-template>
+</ng-template>
+    </td>
+      <td class="example2 text-center border px-8 py-4"></td>
+    </tr>
+    <tr>
+      <tr *ngFor="let row of unit; let i = index" >
+        <td class="example2 text-center border px-8 py-4">
+          <div #register="ngForm" [formGroup]="form1">
+          <h4>Enroute Location</h4>
+          <mat-form-field appearance="outline">
+            <mat-label for="Biz">Biz2</mat-label>
+            <mat-select  formControlName="Biz">
+              <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+              </mat-option>
+              <mat-error *ngIf="form1.get('Biz')?.hasError('required')" >
+                Business Name is required*
+                </mat-error>
+          </mat-select>
+          </mat-form-field>
+        </div>
+      <br>
+          <button mat-raised-button color="primary" (click)="deleteItem(i)">Delete Enrout</button>
+        </td>
+
+      <td class=" example2 text-center border px-8 py-4">
+        <div #register="ngForm" [formGroup]="form1">
+        <mat-form-field appearance="outline">
+        <mat-label for="service2">Service</mat-label>
+        <mat-select formControlName="service2">
+          <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+          </mat-option>
+          <mat-error *ngIf="form1.get('service2')?.hasError('required')" >
+            Business Name is required*
+            </mat-error>
+      </mat-select>
+      </mat-form-field>
+    </div>
+    </td>
+
+      <td class="example2 text-center border px-8 py-4">
+        <div #register="ngForm" [formGroup]="form1">
+          <mat-form-field class="example4" appearance="outline">
+            <mat-label for="quanity1">Quantity</mat-label>
+            <mat-select  formControlName="quanity1">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+              <mat-error *ngIf="form1.get('quanity1')?.hasError('required')">
+                Service Name is Required*
+              </mat-error>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example" appearance="outline">
+            <mat-label for="mt1">Mt</mat-label>
+            <mat-select formControlName="mt1"disableRipple>
+              <mat-option value="1"> 1</mat-option>
+              <mat-option value="2"> 2</mat-option>
+              <mat-option value="3"> 3</mat-option>  <mat-error *ngIf="form1.get('mt1')?.hasError('required')">
+                Service Name is Required*
+              </mat-error>
+            </mat-select>
+          </mat-form-field>
+          </div>
+        <div class="col-md-2">
+          <div class="btn-div">
+          <button mat-mini-fab color="accent"class="ss" (click)="onAddRow2()" *ngIf="tmpo!=3;else temp"><mat-icon>add</mat-icon></button>
+      </div><br>
+      </div>
+      <ng-template #temp><br><br>
+        <mat-form-field class="example5" appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <mat-select >
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example3" appearance="outline">
+          <mat-label>Mt</mat-label>
+          <mat-select disableRipple>
+            <mat-option value="1"> 1</mat-option>
+            <mat-option value="2"> 2</mat-option>
+            <mat-option value="3"> 3</mat-option>  </mat-select>
+        </mat-form-field>
+        <button class="a" mat-mini-fab color="accent" (click)="onDelete()">
+        <mat-icon>remove</mat-icon>
+      </button>
+        <br>
+        <br>
+        <button><span (click)="onAddRow1()" *ngIf="tmpo!=2;else temp"></span>
+        </button>
+        <ng-template>
+             <ng-template #tmpo>
+              <mat-form-field class="example3 align-left" appearance="outline">
+                <mat-label>Quantity</mat-label>
+                <mat-select>
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example3" appearance="outline">
+                <mat-label>Mt</mat-label>
+                <mat-select disableRipple>
+                  <mat-option value="1"> 1</mat-option>
+                  <mat-option value="2"> 2</mat-option>
+                  <mat-option value="3"> 3</mat-option> </mat-select>
+              </mat-form-field>
+          </ng-template>
+      </ng-template>
+      </ng-template>
+     </td>
+      <td class="example2 text-center border px-8 py-4">
+        <div #register="ngForm" [formGroup]="form1">
+          <mat-form-field class="example4" appearance="outline">
+            <mat-label for="quanity3">Quantity</mat-label>
+            <mat-select  formControlName="quanity3">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+              <mat-error *ngIf="form1.get('quanity3')?.hasError('required')">
+                Service Name is Required*
+              </mat-error>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field class="example" appearance="outline">
+          <mat-label for="mt3">Mt</mat-label>
+          <mat-select formControlName="mt3"disableRipple>
+            <mat-option value="1"> 1</mat-option>
+            <mat-option value="2"> 2</mat-option>
+            <mat-option value="3"> 3</mat-option> <mat-error *ngIf="form1.get('mt3')?.hasError('required')" >
+              </mat-error>
+          </mat-select>
+        </mat-form-field>
+      </div>
+        <div class="col-md-2">
+          <div class="btn-div">
+          <button mat-mini-fab color="accent"class="ss" (click)="onAddRow4()" *ngIf="tmpo!=5;else temp"><mat-icon>add</mat-icon></button>
+      </div><br>
+      </div>
+      <ng-template #temp><br><br>
+        <mat-form-field class="example5" appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <mat-select >
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example3" appearance="outline">
+          <mat-label>Mt</mat-label>
+          <mat-select disableRipple>
+            <mat-option value="1"> 1</mat-option>
+            <mat-option value="2"> 2</mat-option>
+            <mat-option value="3"> 3</mat-option>  </mat-select>
+        </mat-form-field>
+        <button class="a" mat-mini-fab color="accent" (click)="onDelete()">
+        <mat-icon>remove</mat-icon>
+      </button>
+        <br>
+        <br>
+        <button><span (click)="onAddRow1()" *ngIf="tmpo!=2;else temp"></span>
+        </button>
+        <ng-template>
+             <ng-template #tmpo>
+              <mat-form-field class="example3 align-left" appearance="outline">
+                <mat-label>Quantity</mat-label>
+                <mat-select>
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example3" appearance="outline">
+                <mat-label>Mt</mat-label>
+                <mat-select disableRipple>
+                  <mat-option value="1"> 1</mat-option>
+                  <mat-option value="2"> 2</mat-option>
+                  <mat-option value="3"> 3</mat-option> </mat-select>
+              </mat-form-field>
+          </ng-template>
+      </ng-template>
+      </ng-template>
+      </td>
+    </tr>
+    <tr>
+      <tr *ngFor="let row of states; let i = index" >
+        <td class=" example2 text-center border px-8 py-4">
+          <div #register="ngForm" [formGroup]="form1">
+            <h4>End Delivery Location:</h4>
+              <mat-form-field appearance="outline">
+                <mat-label for="biz3">Biz Name 3</mat-label>
+                <mat-select formControlName="biz3">
+                    <mat-option *ngFor="let option of options" [value]="option">
+                      {{option}}
+                    </mat-option>
+                    <mat-option *ngFor="let unit of unit" [value]="unit">{{unit}}</mat-option>
+                    <mat-error *ngIf="form1.get('biz3')?.hasError('required')" >
+                      Business Name is required*
+                      </mat-error>
+                </mat-select>
+              </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addItem(i)">Add Enrout Location</button>
+    </div>
+        </td>
+      <td class="example2 text-center border px-8 py-4">
+        <div #register="ngForm" [formGroup]="form1">
+          <mat-form-field appearance="outline">
+          <mat-label for="service3">Service</mat-label>
+          <mat-select formControlName="service3">
+            <mat-option *ngFor="let option of options" [value]="option">
+              {{option}}
+            </mat-option>
+            <mat-error *ngIf="form1.get('service3')?.hasError('required')" >
+              Business Name is required*
+              </mat-error>
+        </mat-select>
+        </mat-form-field>
+      </div>
+      </td>
+      <td class="example2 text-center border px-8 py-4">
+      </td>
+      <td class="example2 text-center border px-8 py-4">
+        <div #register="ngForm" [formGroup]="form1">
+          <mat-form-field class="example4" appearance="outline">
+            <mat-label for="quanity4">Quantity</mat-label>
+            <mat-select  formControlName="quanity4">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+              <mat-error *ngIf="form1.get('quanity4')?.hasError('required')">
+              </mat-error>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field class="example" appearance="outline">
+          <mat-label for="mt4">Mt</mat-label>
+          <mat-select formControlName="mt4" disableRipple>
+            <mat-option value="1"> 1</mat-option>
+            <mat-option value="2"> 2</mat-option>
+            <mat-option value="3"> 3</mat-option>
+            <mat-error *ngIf="form1.get('mt4')?.hasError('required')" >
+              </mat-error>
+          </mat-select>
+        </mat-form-field>
+      </div>
+        <div class="col-md-2">
+          <div class="btn-div">
+          <button mat-mini-fab color="accent"class="ss" (click)="onAddRow6()" *ngIf="tmpo!=7;else temp"><mat-icon>add</mat-icon></button>
+      </div><br>
+      </div>
+      <ng-template #temp><br><br>
+        <mat-form-field class="example5" appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <mat-select >
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example3" appearance="outline">
+          <mat-label>Mt</mat-label>
+          <mat-select disableRipple>
+            <mat-option value="1"> 1</mat-option>
+            <mat-option value="2"> 2</mat-option>
+            <mat-option value="3"> 3</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button class="a" mat-mini-fab color="accent" (click)="onDelete()">
+        <mat-icon>remove</mat-icon>
+      </button>
+        <br>
+        <br>
+        <button><span (click)="onAddRow1()" *ngIf="tmpo!=2;else temp"></span>
+        </button>
+        <ng-template>
+             <ng-template #tmpo>
+              <mat-form-field class="example3 align-left" appearance="outline">
+                <mat-label>Quantity</mat-label>
+                <mat-select>
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let quantity of quantity" [value]="quantity">{{quantity}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example3" appearance="outline">
+                <mat-label>Mt</mat-label>
+                <mat-select disableRipple>
+                  <mat-option value="1"> 1</mat-option>
+                  <mat-option value="2"> 2</mat-option>
+                  <mat-option value="3"> 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </ng-template>
+      </ng-template>
+      </ng-template>
+          </td>
+    </tr>
+    <tr>
+      <td> <mat-checkbox class="example-margin">permit Change of Route Plan</mat-checkbox>
+      </td>
+    </tr>
+
+  </table><br>
+  <div>
+  <button mat-raised-button color="primary" (click)="saveForm()" >save</button>
+  </div>
+  </div><br>
+
+
+
+

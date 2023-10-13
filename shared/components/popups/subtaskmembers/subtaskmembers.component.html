@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="content">
+    <div fxLayout="column" style="margin: 20px 0 10px 0">
+      <p>sub task members</p>
+      <div style="color: #9a9a9a">*Can be edited by Folder Admins Only</div>
+      <!-- <div style="color:#000000;margin-top: 10px;">File Admins:
+              <ng-container>
+                  <span class="admin-name" style="color:#3366FF;margin: 0 10px;">
+                      Tabitha Potter
+                  </span>
+                  <span class="admin-name" style="color:#3366FF;margin: 0 10px;">
+                      Ram S
+                  </span>
+              </ng-container>
+          </div> -->
+      <div class="add-user" fxLayout="row">
+        <div class="" style="margin: 10px 0">Folder Users:</div>
+        <div class="add"><button mat-raised-button class="app-btn" style="margin: 10px">Add</button></div>
+        <!-- <div class="remove"><button mat-raised-button class="app-btn" style="margin: 10px;">Remove</button>
+              </div> -->
+      </div>
+    </div>
+
+    <div>
+      <div class="table-responsive mat-elevation-z8 printTable">
+        <mat-table #table id="ExampleMaterialTable" matSort [dataSource]="dataSource" matTableResponsive>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>User Name</mat-header-cell>
+            <mat-cell class="flex-stretch" *matCellDef="let element"> {{ element.user_name }} </mat-cell>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="recent-file-access-permissions">
+                      <mat-header-cell mat-sort-header *matHeaderCellDef>Recent File Access Permissions
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row">
+                          <mat-form-field appearance="outline" style=" margin-left: 10px; font-size: 10px;"
+                              class="form-field-style ">
+                              <mat-select [(ngModel)]="row.access_recent_no_of_files"
+                                  (ngModelChange)="updateFolderPermission(row)">
+                                  <mat-option value="">All Files in Folder</mat-option>
+                                  <mat-option value="">Last 10 recent Files</mat-option>
+                                  <mat-option value="">Only recent file</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                      </mat-cell>
+                  </ng-container> -->
+
+          <ng-container matColumnDef="upload_File">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Upload File</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox [(ngModel)]="row.upload_folder"> </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="rename-file">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Rename File </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox [(ngModel)]="row.rename_folder"> </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="download">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>View Folder</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox [(ngModel)]="row.download_folder" [disabled]="row.download_folder"></mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="copy">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Copy</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox [(ngModel)]="row.copy_folder"> </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="share">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Share</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox [(ngModel)]="row.share_folder"> </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="file-activity-notifications">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>File Activity Notifications</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox [(ngModel)]="row.folder_activity_notification"> </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="promote-to-admin">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Promote to Admin</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox [(ngModel)]="row.folder_admin"> </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="remove_user">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Remove User</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <!-- <mat-checkbox [(ngModel)]=element.remove_user (ngModelChange)="updateFilesPermission(element)">
+                                                  </mat-checkbox> -->
+              <mat-icon class="mat-18" style="color: #f44336; cursor: pointer">delete</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            [ngClass]="{ highlighted: selection.isSelected(row) }"
+          >
+          </mat-row>
+        </mat-table>
+        <!-- <mat-toolbar> -->
+        <mat-toolbar-row>
+          <mat-icon title="Export" style="cursor: pointer" [matMenuTriggerFor]="exportMenu">save_alt </mat-icon>
+          <mat-menu #exportMenu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>picture_as_pdf</mat-icon>
+              <span>Export PDF</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>grid_on</mat-icon>
+              <span>Export SpreadSheet</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>grid_on</mat-icon>
+              <span>Export csv File</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>grid_on</mat-icon>
+              <span>Export json</span>
+            </button>
+            <button mat-menu-item ngxPrintItemButton className="printTable printTitle">
+              <mat-icon>print</mat-icon>
+              <span>Print</span>
+            </button>
+          </mat-menu>
+          <mat-form-field
+            appearance="outline"
+            style="width: 25%; margin-left: 10px; font-size: 10px"
+            class="form-field-style primary-font-family"
+          >
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search" />
+          </mat-form-field>
+          <mat-paginator
+            (page)="
+              paginatorHtmlElement.nativeElement.querySelector('div.mat-select-value > span > span').innerHTML =
+                paginator.pageSize == 2147483647 ? 'All' : paginator.pageSize
+            "
+            #paginator
+            #paginatorElement
+            [length]="dataSource.data.length"
+            style="width: 100%"
+            class="paginator"
+            [hidePageSize]="false"
+            [showFirstLastButtons]="false"
+            [pageSizeOptions]="[5, 10, 20, 2147483647]"
+          >
+          </mat-paginator>
+        </mat-toolbar-row>
+
+        <!-- </mat-toolbar> -->
+      </div>
+    </div>
+  </div>
+</div>

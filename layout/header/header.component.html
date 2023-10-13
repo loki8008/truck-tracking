@@ -1,0 +1,22 @@
+<p>
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <a href="javascript:void(0)" (click)="goBack()">
+       <mat-icon>arrow_back_ios</mat-icon>
+      </a>
+    </button>
+    <span>Freight - Transport - Tracking Management App</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+    <span>Download Web App</span>
+    <mat-icon>download</mat-icon>
+    <mat-form-field appearance="fill">
+      <mat-label>Language</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let language of languages" [value]="language">{{language}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-toolbar>
+</p>

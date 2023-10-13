@@ -1,0 +1,32 @@
+<form #register="ngForm" [formGroup]="form1">
+  <div class =" flex justify-center" >
+    <div class="bg-white p-16 rounded shadow-2xl w-1/3">
+       <h2 class = "text-3xl font-bold mb-10 text-violet-900">Customer login</h2>
+        <div >
+          <mat-form-field class="customer w-48" appearance="outline">
+            <mat-label class=" text-gray-500 ">Phonenumber:</mat-label>
+            <input type="text" formControlName="mobile_number" matInput />
+            <mat-error *ngIf="form1.get('mobile_number')?.hasError('required')">
+              mobile_number is required*
+            </mat-error>
+          </mat-form-field>
+          <div [formGroup]="form2">
+          <mat-form-field class="customer w-200" appearance="outline">
+            <mat-label class="text-gray-500"> NewPassword:</mat-label>
+            <input formControlName="password" matInput [errorStateMatcher]="passwordErrorMatcher">
+            <mat-error>Error: {{ getErrorMessage('password') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="customer w-48 " appearance="outline">
+            <mat-label class="text-gray-500">ConfirmPassword:</mat-label>
+            <input formControlName="confirm_password" matInput [errorStateMatcher]="confirmErrorMatcher">
+            <mat-error>Error: {{ getErrorMessage('confirm_password') }}</mat-error>
+          </mat-form-field>
+        </div>
+       </div>
+          <button (click)="saveForm()" mat-raised-button color="primary" [disabled]="form1.invalid"
+  class="block w-full bg-blue-400 p-4 rounded text-blue-800"  [routerLink]="['/login']">Save</button><br><br>
+
+           </div>
+   </div>
+  </form>
+

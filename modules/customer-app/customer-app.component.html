@@ -1,0 +1,13 @@
+
+<section>
+
+  <div class="example">
+
+   &nbsp; &nbsp; <button mat-raised-button color="primary"  class="block  w-96 bg--400 p-4 rounded text-blue-800" [routerLink]="['/customer-app/plan']" routerLinkActive="router-link-active" >Plan Freight Load</button>&nbsp; &nbsp;
+    <button mat-raised-button color="primary" class="block  w-96 bg--400 p-4 rounded text-blue-800" [routerLink]="['/customer-app/transport']" routerLinkActive="router-link-active" >Invite/Edit Transporter</button>&nbsp; &nbsp;
+    <button mat-raised-button color="primary" class="block  w-96 bg--400 p-4 rounded text-blue-800" [routerLink]="['/customer-app/freight']" routerLinkActive="router-link-active" >Track Freight</button>
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</section>
